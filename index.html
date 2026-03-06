@@ -202,10 +202,10 @@ header{background:linear-gradient(180deg,#020817,#0f172a);border-bottom:1px soli
   @page{margin:0.5in}
 }
 
-/* ── MOBILE: uniform 65% scale — matches iPhone target look ── */
+/* ── MOBILE: uniform 65% zoom — no blur, crisp on Retina ── */
 @media(max-width:600px){
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-  body{transform:scale(0.65);transform-origin:top left;width:153.85%;overflow-x:hidden}
+  body{zoom:0.65}
   .pair-row{grid-template-columns:1fr}
 }
 

@@ -32,6 +32,8 @@
 .pair-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
 .pair-row .card-full{margin-bottom:0}
 body{font-family:'DM Sans',sans-serif;background:linear-gradient(160deg,#0f172a 0%,#1e2a3a 50%,#0f1f35 100%);background-attachment:fixed;color:var(--white);min-height:100vh;font-size:85%}
+/* Lock iOS Safari text size to prevent user font-size settings from inflating text */
+@media(max-width:600px){html{-webkit-text-size-adjust:75%;text-size-adjust:75%;font-size:12px}body{font-size:1rem}}
 header{background:linear-gradient(180deg,#020817,#0f172a);border-bottom:1px solid rgba(59,130,246,.15);position:sticky;top:0;z-index:200;box-shadow:0 4px 30px rgba(0,0,0,.6)}
 .hdr{max-width:1480px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
 .brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
@@ -204,33 +206,33 @@ header{background:linear-gradient(180deg,#020817,#0f172a);border-bottom:1px soli
 @media(max-width:600px){
   /* Header */
   .hdr{padding:10px 12px;height:auto;flex-wrap:nowrap;gap:8px}
-  .brand h1{font-size:1.3rem}
-  .brand p{font-size:.56rem;letter-spacing:.15em}
+  .brand h1{font-size:1.5rem}
+  .brand p{font-size:.7rem;letter-spacing:.15em}
   .gem{width:20px;height:30px}
-  .upd-time{font-size:.58rem}
-  .upd-badge{font-size:.58rem;padding:3px 7px}
+  .upd-time{font-size:.75rem}
+  .upd-badge{font-size:.75rem;padding:3px 7px}
   /* Category tabs */
   .cattabs{padding:0 10px}
-  .ctab{padding:10px 14px;font-size:.75rem;gap:5px}
+  .ctab{padding:10px 14px;font-size:.9rem;gap:5px}
   /* Filter buttons */
-  .iph-filters .stab{font-size:.66rem;padding:0 10px;height:30px;border-radius:16px}
+  .iph-filters .stab{font-size:.82rem;padding:0 10px;height:30px;border-radius:16px}
   .iph-filters .stab svg{width:11px;height:11px}
   /* Main layout */
   .main{padding:10px 10px 36px}
   .search-wrap{padding:8px 10px 0}
   /* Cards */
   .cfhdr{padding:9px 12px;flex-wrap:nowrap;gap:4px}
-  .cfhdr h3{font-size:.8rem;font-weight:700}
-  .badge{font-size:.58rem;padding:2px 7px;border-radius:6px}
-  .card-note{padding:4px 12px;font-size:.62rem}
+  .cfhdr h3{font-size:1rem;font-weight:700}
+  .badge{font-size:.72rem;padding:2px 7px;border-radius:6px}
+  .card-note{padding:4px 12px;font-size:.78rem}
   .card-full{border-radius:10px;margin-bottom:12px}
   /* Price table */
-  .tbl th{font-size:.57rem;padding:5px 8px;letter-spacing:.06em}
-  .tbl td{font-size:.77rem;padding:7px 8px}
-  .cap{font-size:.74rem}
-  .pr{font-size:.82rem}
-  .pr2{font-size:.79rem}
-  .nu{font-size:.7rem}
+  .tbl th{font-size:.72rem;padding:5px 8px;letter-spacing:.06em}
+  .tbl td{font-size:.95rem;padding:7px 8px}
+  .cap{font-size:.9rem}
+  .pr{font-size:1rem}
+  .pr2{font-size:.95rem}
+  .nu{font-size:.85rem}
   /* Deductions */
   .ded-btn{font-size:.66rem;padding:7px 12px}
   .ded-label{font-size:.68rem}
@@ -249,16 +251,16 @@ header{background:linear-gradient(180deg,#020817,#0f172a);border-bottom:1px soli
   .pair-row{grid-template-columns:1fr}
 }
 @media(max-width:390px){
-  .tbl th{font-size:.54rem;padding:5px 6px}
-  .tbl td{font-size:.74rem;padding:6px 6px}
-  .cfhdr h3{font-size:.76rem}
-  .brand h1{font-size:1.2rem}
-  .ctab{padding:9px 12px;font-size:.72rem}
+  .tbl th{font-size:.68rem;padding:5px 6px}
+  .tbl td{font-size:.9rem;padding:6px 6px}
+  .cfhdr h3{font-size:.95rem}
+  .brand h1{font-size:1.4rem}
+  .ctab{padding:9px 12px;font-size:.85rem}
 }
 @media(max-width:380px){
-  .tbl th{font-size:.52rem;padding:4px 5px;letter-spacing:.03em}
-  .tbl td{font-size:.71rem;padding:6px 5px}
-  .brand h1{font-size:1.15rem}
+  .tbl th{font-size:.65rem;padding:4px 5px;letter-spacing:.03em}
+  .tbl td{font-size:.87rem;padding:6px 5px}
+  .brand h1{font-size:1.3rem}
 }
 
 

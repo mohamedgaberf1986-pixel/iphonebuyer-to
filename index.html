@@ -202,10 +202,10 @@ header{background:linear-gradient(180deg,#020817,#0f172a);border-bottom:1px soli
   @page{margin:0.5in}
 }
 
-/* ── MOBILE: 75% scale ── */
+/* ── MOBILE: 63% scale on inner wrapper — fixed overlays unaffected ── */
 @media(max-width:600px){
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-  body{transform:scale(0.63);transform-origin:top left;width:158.73%;overflow-x:hidden}
+  #page-wrap{transform:scale(0.63);transform-origin:top left;width:158.73%;overflow-x:hidden}
   .pair-row{grid-template-columns:1fr}
 }
 
@@ -337,6 +337,9 @@ html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
+
+<!-- Scale wrapper — fixed overlays stay OUTSIDE so position:fixed works correctly -->
+<div id="page-wrap">
 
 <header>
   <div class="hdr">
@@ -733,6 +736,10 @@ html{scroll-behavior:smooth}
   </div>
 </footer>
 
+<!-- End scale wrapper -->
+</div>
+
+<!-- ── FIXED OVERLAYS (outside scale wrapper) ── -->
 <!-- ── QUOTE POPUP ── -->
 <div id="quote-popup-overlay">
   <div id="quote-popup">

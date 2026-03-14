@@ -839,8 +839,8 @@ html{scroll-behavior:smooth}
     <div id="agree-footer">
       <div id="agree-progress-track"><div id="agree-progress-fill"></div></div>
       <div id="agree-bottom-row">
-        <div id="agree-note">Tap to agree and enter</div>
-        <button id="agree-btn" onclick="acceptAgreement()">I Agree &amp; Enter</button>
+        <div id="agree-note">Scroll to the bottom to unlock</div>
+        <button id="agree-btn" onclick="acceptAgreement()" disabled>I Agree &amp; Enter</button>
       </div>
     </div>
 
@@ -1432,14 +1432,34 @@ function acceptAgreement(){
     document.getElementById('agree-overlay').style.display='none';
     return;
   }
-  // Button is always enabled — terms are shown, user just taps agree
-  const btn=document.getElementById('agree-btn');
-  btn.classList.add('ready');
-  // Scroll progress bar (cosmetic only)
-  const fill=document.getElementById('agree-progress-fill');
-  const body=document.getElementById('agree-body');
+  var btn=document.getElementById('agree-btn');
+  var note=document.getElementById('agree-note');
+  var fill=document.getElementById('agree-progress-fill');
+  var body=document.getElementById('agree-body');
+  function unlockBtn(){
+    if(btn.disabled){
+      btn.disabled=false;
+      btn.classList.add('ready');
+      note.textContent='Tap to agree and enter';
+      fill.style.width='100%';
+    }
+  }
+  // IntersectionObserver: fires the instant the last term item enters the viewport
+  var sentinel=body.lastElementChild;
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ unlockBtn(); obs.disconnect(); }
+    },{root:body,threshold:0.1});
+    obs.observe(sentinel);
+  } else {
+    // Fallback for very old browsers
+    body.addEventListener('scroll',function(){
+      if(body.scrollHeight-body.scrollTop-body.clientHeight<50) unlockBtn();
+    });
+  }
+  // Scroll progress bar
   body.addEventListener('scroll',function(){
-    const pct=body.scrollTop/(body.scrollHeight-body.clientHeight)*100;
+    var pct=body.scrollTop/(body.scrollHeight-body.clientHeight)*100;
     fill.style.width=Math.min(pct,100)+'%';
   });
 })();

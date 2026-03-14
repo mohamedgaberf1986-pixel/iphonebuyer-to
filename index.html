@@ -839,8 +839,8 @@ html{scroll-behavior:smooth}
     <div id="agree-footer">
       <div id="agree-progress-track"><div id="agree-progress-fill"></div></div>
       <div id="agree-bottom-row">
-        <div id="agree-note">Read all terms to unlock</div>
-        <button id="agree-btn" onclick="acceptAgreement()" disabled>I Agree &amp; Enter</button>
+        <div id="agree-note">Tap to agree and enter</div>
+        <button id="agree-btn" onclick="acceptAgreement()">I Agree &amp; Enter</button>
       </div>
     </div>
 
@@ -1432,26 +1432,15 @@ function acceptAgreement(){
     document.getElementById('agree-overlay').style.display='none';
     return;
   }
-  // Unlock button after 4 seconds OR when user scrolls near bottom — whichever comes first
+  // Button is always enabled — terms are shown, user just taps agree
   const btn=document.getElementById('agree-btn');
-  const note=document.getElementById('agree-note');
+  btn.classList.add('ready');
+  // Scroll progress bar (cosmetic only)
   const fill=document.getElementById('agree-progress-fill');
-  function unlockBtn(){
-    if(btn.disabled){
-      btn.disabled=false;
-      btn.classList.add('ready');
-      note.textContent="You\'ve read the terms — tap to continue";
-      fill.style.width='100%';
-    }
-  }
-  // Timer fallback (works on all browsers/devices)
-  setTimeout(unlockBtn, 4000);
-  // Scroll detection (works on desktop)
   const body=document.getElementById('agree-body');
   body.addEventListener('scroll',function(){
     const pct=body.scrollTop/(body.scrollHeight-body.clientHeight)*100;
     fill.style.width=Math.min(pct,100)+'%';
-    if(body.scrollHeight-body.scrollTop-body.clientHeight<60) unlockBtn();
   });
 })();
 

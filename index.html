@@ -1425,33 +1425,34 @@ function renderAll(){renderNI();renderUI();renderNIpad();renderUIpad();renderMac
 // ── AGREEMENT OVERLAY ──
 function acceptAgreement(){
   document.getElementById('agree-overlay').style.display='none';
-  sessionStorage.setItem('m901_agreed_session','1');
   localStorage.setItem('m901_agreed','1');
 }
 (function(){
-  // If this is a brand-new tab (no session flag), clear the localStorage agreement
-  // so user must re-agree. If session flag exists, it's just a refresh — keep it.
-  if(!sessionStorage.getItem('m901_agreed_session')){
-    localStorage.removeItem('m901_agreed');
-  }
   if(localStorage.getItem('m901_agreed')==='1'){
     document.getElementById('agree-overlay').style.display='none';
-  } else {
-    const body=document.getElementById('agree-body');
-    const btn=document.getElementById('agree-btn');
-    const note=document.getElementById('agree-note');
-    const fill=document.getElementById('agree-progress-fill');
-    body.addEventListener('scroll',function(){
-      const pct=body.scrollTop/(body.scrollHeight-body.clientHeight)*100;
-      fill.style.width=Math.min(pct,100)+'%';
-      const atBottom=body.scrollHeight-body.scrollTop-body.clientHeight<30;
-      if(atBottom&&btn.disabled){
-        btn.disabled=false;
-        btn.classList.add('ready');
-        note.textContent='You\'ve read the terms — tap to continue';
-      }
-    });
+    return;
   }
+  // Unlock button after 4 seconds OR when user scrolls near bottom — whichever comes first
+  const btn=document.getElementById('agree-btn');
+  const note=document.getElementById('agree-note');
+  const fill=document.getElementById('agree-progress-fill');
+  function unlockBtn(){
+    if(btn.disabled){
+      btn.disabled=false;
+      btn.classList.add('ready');
+      note.textContent="You\'ve read the terms — tap to continue";
+      fill.style.width='100%';
+    }
+  }
+  // Timer fallback (works on all browsers/devices)
+  setTimeout(unlockBtn, 4000);
+  // Scroll detection (works on desktop)
+  const body=document.getElementById('agree-body');
+  body.addEventListener('scroll',function(){
+    const pct=body.scrollTop/(body.scrollHeight-body.clientHeight)*100;
+    fill.style.width=Math.min(pct,100)+'%';
+    if(body.scrollHeight-body.scrollTop-body.clientHeight<60) unlockBtn();
+  });
 })();
 
 // ── NAV ──
